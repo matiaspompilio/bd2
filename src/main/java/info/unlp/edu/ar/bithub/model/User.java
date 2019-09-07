@@ -12,8 +12,6 @@ public class User {
 
     private String email;
 
-    @DBRef
-    private List<Review> reviews;
 
     @DBRef
     private List<Commit> commits;
@@ -41,13 +39,6 @@ public class User {
         this.email = email;
     }
 
-    public List<Review> getReviews() {
-        return reviews;
-    }
-
-    public void setReviews(List<Review> reviews) {
-        this.reviews = reviews;
-    }
 
     public List<Commit> getCommits() {
         return commits;

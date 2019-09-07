@@ -10,7 +10,6 @@ public class Branch {
 
     private String name;
 
-    private List<Review> reviews= new ArrayList<Review>();
 
     private List<Commit> commits= new ArrayList<Commit>();
 
@@ -29,13 +28,6 @@ public class Branch {
         this.name = name;
     }
 
-    public List<Review> getReviews() {
-        return reviews;
-    }
-
-    public void setReviews(List<Review> reviews) {
-        this.reviews = reviews;
-    }
 
     public List<Commit> getCommits() {
         return commits;

@@ -14,8 +14,6 @@ public class File {
 
     private Commit commit;
 
-    @DBRef
-    private List<FileReview> fileReviews;
 
     public File(){}
 
@@ -47,11 +45,5 @@ public class File {
         this.commit = commit;
     }
 
-    public List<FileReview> getFileReviews() {
-        return fileReviews;
-    }
 
-    public void setFileReviews(List<FileReview> fileReviews) {
-        this.fileReviews = fileReviews;
-    }
 }
