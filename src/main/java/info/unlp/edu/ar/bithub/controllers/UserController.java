@@ -1,28 +1,27 @@
 package info.unlp.edu.ar.bithub.controllers;
 
 import info.unlp.edu.ar.bithub.model.User;
-import info.unlp.edu.ar.bithub.services.impl.IUserService;
-import org.bson.types.ObjectId;
+import info.unlp.edu.ar.bithub.services.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.inject.Inject;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/users")
 public class UserController {
 
-    private IUserService userService;
+    @Inject
+    private UserService userService;
 
-    @GetMapping(value = "/")
-    public List<User> getAllUsers() {
-        return userService.getAllUser();
+    private UserService getUserService(){
+        return this.userService;
     }
 
     @GetMapping
-    public Optional<User> getUserById(@RequestParam(value = "id") ObjectId id){
-        return  userService.getUser(id);
+    public List<User> getAllUsers() {
+        return this.getUserService().getAllUser();
     }
 
     @PostMapping
@@ -30,7 +29,7 @@ public class UserController {
                                      @RequestParam(value = "email")String email) {
         ResponseEntity<?> response = null;
         try {
-            userService.addUser(name, email);
+           this.getUserService().addUser(name, email);
             response = ResponseEntity.status(200).build();
         } catch(Exception e1){
             response = ResponseEntity.status(500).body("Hubo un error al insertar el usuario");
