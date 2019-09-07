@@ -4,12 +4,14 @@ import info.unlp.edu.ar.bithub.model.User;
 import info.unlp.edu.ar.bithub.repositories.UserRepository;
 import info.unlp.edu.ar.bithub.services.UserService;
 import org.bson.types.ObjectId;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 import java.util.Optional;
 
 public class IUserService implements UserService {
 
+    @Autowired
     private UserRepository repository;
 
     @Override
