@@ -1,7 +1,5 @@
 package info.unlp.edu.ar.bithub.model;
 
-import org.bson.types.ObjectId;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -9,9 +7,6 @@ import java.util.List;
 
 @Document(collection = "commit")
 public class Commit {
-
-    @Id
-    private ObjectId _id;
 
     private String message;
 
@@ -22,23 +17,15 @@ public class Commit {
     @DBRef
     private List<File> files;
 
-    private Branch branch;
 
     public Commit(){}
 
-    public Commit(ObjectId _id, String message, String hash, User author, List<File> files, Branch branch){
-        this._id = _id;
+    public Commit(String message, String hash, User author, List<File> files){
         this.message = message;
         this.hash = hash;
         this.author = author;
         this.files = files;
-        this.branch= branch;
     }
-
-    public ObjectId get_id() { return this._id; }
-
-    public void set_id(ObjectId _id) { this._id = _id; }
-
 
     public String getMessage() {
         return message;
@@ -72,11 +59,4 @@ public class Commit {
         this.files = files;
     }
 
-    public Branch getBranch() {
-        return branch;
-    }
-
-    public void setBranch(Branch branch) {
-        this.branch = branch;
-    }
 }
