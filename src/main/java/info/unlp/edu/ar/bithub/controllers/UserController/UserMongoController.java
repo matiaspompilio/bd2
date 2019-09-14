@@ -9,7 +9,7 @@ import javax.inject.Inject;
 import java.util.List;
 
 @RestController
-@RequestMapping("/mongo/users")
+@RequestMapping("/mongo/user")
 public class UserMongoController {
 
     @Inject
