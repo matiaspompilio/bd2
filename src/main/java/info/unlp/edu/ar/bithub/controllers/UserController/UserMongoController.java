@@ -34,8 +34,6 @@ public class UserMongoController {
         } catch(Exception e1){
             response = ResponseEntity.status(500).body("Hubo un error al insertar el usuario");
         }
-
         return response;
-
     }
 }
