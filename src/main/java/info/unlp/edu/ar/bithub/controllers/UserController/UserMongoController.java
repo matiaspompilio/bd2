@@ -21,7 +21,7 @@ public class UserMongoController {
 
     @GetMapping
     public List<User> getAllUsers() {
-        return this.getUserService().getAllUser();
+        return this.getUserService().getAllUsersFromMongo();
     }
 
     @PostMapping
