@@ -1,16 +1,13 @@
 package info.unlp.edu.ar.bithub.services;
 
 import info.unlp.edu.ar.bithub.model.User;
-import info.unlp.edu.ar.bithub.repositories.UserRepository;
+import info.unlp.edu.ar.bithub.repositories.UserRepository.MongoUserRepository;
 import org.bson.types.ObjectId;
-import org.elasticsearch.action.admin.indices.create.CreateIndexRequest;
-import org.elasticsearch.action.admin.indices.create.CreateIndexResponse;
 import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.common.xcontent.XContentBuilder;
 import org.elasticsearch.common.xcontent.XContentFactory;
-import org.elasticsearch.common.xcontent.XContentType;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.inject.Named;
@@ -21,7 +18,7 @@ import java.util.Optional;
 public class UserService {
 
     @Autowired
-    private UserRepository userRepository;
+    private MongoUserRepository userRepository;
 
     private RestHighLevelClient client;
 
@@ -29,7 +26,7 @@ public class UserService {
         this.client = client;
     }
 
-    private UserRepository getUserRepository(){
+    private MongoUserRepository getUserRepository(){
         return this.userRepository;
     }
 
