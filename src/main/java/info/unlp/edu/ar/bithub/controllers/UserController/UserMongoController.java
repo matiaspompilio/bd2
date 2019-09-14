@@ -1,4 +1,4 @@
-package info.unlp.edu.ar.bithub.controllers;
+package info.unlp.edu.ar.bithub.controllers.UserController;
 
 import info.unlp.edu.ar.bithub.model.User;
 import info.unlp.edu.ar.bithub.services.UserService;
@@ -9,8 +9,8 @@ import javax.inject.Inject;
 import java.util.List;
 
 @RestController
-@RequestMapping("/users")
-public class UserController {
+@RequestMapping("/mongo/users")
+public class UserMongoController {
 
     @Inject
     private UserService userService;
