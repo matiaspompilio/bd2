@@ -1,7 +1,7 @@
 package info.unlp.edu.ar.bithub.services;
 
 import info.unlp.edu.ar.bithub.model.User;
-import info.unlp.edu.ar.bithub.repositories.UserRepository.MongoUserRepository;
+import info.unlp.edu.ar.bithub.repositories.UserRepository.UserRepository;
 import org.bson.types.ObjectId;
 import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.client.RequestOptions;
@@ -18,7 +18,7 @@ import java.util.Optional;
 public class UserService {
 
     @Autowired
-    private MongoUserRepository userRepository;
+    private UserRepository userRepository;
 
     private RestHighLevelClient client;
 
@@ -26,7 +26,7 @@ public class UserService {
         this.client = client;
     }
 
-    private MongoUserRepository getUserRepository(){
+    private UserRepository getUserRepository(){
         return this.userRepository;
     }
 
