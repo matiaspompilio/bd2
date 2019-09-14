@@ -30,28 +30,16 @@ public class UserService {
         return this.userRepository;
     }
 
-    public List<User> getAllUser() {
+    public List<User> getAllUsersFromMongo() {
         return this.getUserRepository().findAll();
     }
 
-    public Optional<User> getUser(ObjectId id) {
+    public Optional<User> getUserFromMongo(ObjectId id) {
         return this.getUserRepository().findById(id);
     }
 
-    public void addUser(String name, String email) throws IOException {
+    public void addUser(String name, String email) {
         User user = new User(name, email);
         this.getUserRepository().save(user);
-        XContentBuilder builder = XContentFactory.jsonBuilder();
-        builder.startObject();
-        {
-            builder.field("user", "fer");
-            builder.field("message", "trying out Elasticsearch");
-        }
-        builder.endObject();
-
-        IndexRequest request = new IndexRequest("twitter").id(user.getId().toString());
-        request.source(builder);
-        client.index(request, RequestOptions.DEFAULT);
-
     }
 }
