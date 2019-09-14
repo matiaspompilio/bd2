@@ -12,6 +12,7 @@ public class Commit {
 
     private String hash;
 
+    @DBRef
     private User author;
 
     @DBRef
@@ -25,6 +26,11 @@ public class Commit {
         this.hash = hash;
         this.author = author;
         this.files = files;
+    }
+
+    public Commit(String message, String hash){
+        this.message = message;
+        this.hash = hash;
     }
 
     public String getMessage() {
