@@ -37,4 +37,9 @@ public class CommitMongoController {
         }
         return response;
     }
+
+    @GetMapping("/{author}")
+    public List<Commit> getAllCommitsByUser (@PathVariable ObjectId author){
+        return this.getCommitService().getAllCommitsFromAuthorFromMongo(author);
+    }
 }

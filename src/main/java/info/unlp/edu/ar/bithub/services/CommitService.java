@@ -30,6 +30,10 @@ public class CommitService {
 
     public List<Commit> getAllCommitsFromMongo(){ return this.getCommitRepository().findAll();}
 
+    public List<Commit> getAllCommitsFromAuthorFromMongo(ObjectId author){
+        return this.getCommitRepository().findByAuthor(author);
+    }
+
     public void addCommit(String message, String hash, ObjectId userId, List<File> files) throws Exception {
         Commit commit= new Commit(message,hash);
         Optional<User> author = this.userRepository.findById(userId);
