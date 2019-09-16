@@ -2,6 +2,7 @@ package info.unlp.edu.ar.bithub.controllers.FileController;
 
 import info.unlp.edu.ar.bithub.model.File;
 import info.unlp.edu.ar.bithub.services.FileService;
+import org.bson.types.ObjectId;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,11 +26,12 @@ public class FileMongoController {
 
     @PostMapping
     public ResponseEntity<?> addFile(@RequestParam(value = "content")String content,
-                                       @RequestParam(value = "filename")String filename
-    ) {
+                                     @RequestParam(value = "filename")String filename,
+                                     @RequestParam(value = "commit")ObjectId commit
+                                     ) {
         ResponseEntity<?> response = null;
         try {
-            this.getFileService().addFile(content,filename);
+            this.getFileService().addFile(commit,content,filename);
             response = ResponseEntity.status(200).build();
         } catch(Exception e1){
             response = ResponseEntity.status(500).body("Hubo un error al insertar el file");

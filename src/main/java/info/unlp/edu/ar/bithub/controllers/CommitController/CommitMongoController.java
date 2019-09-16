@@ -1,12 +1,14 @@
 package info.unlp.edu.ar.bithub.controllers.CommitController;
 
 import info.unlp.edu.ar.bithub.model.Commit;
+import info.unlp.edu.ar.bithub.model.File;
 import info.unlp.edu.ar.bithub.services.CommitService;
 import org.bson.types.ObjectId;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
+import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -30,7 +32,7 @@ public class CommitMongoController {
                                        @RequestParam(value = "author") ObjectId author) {
         ResponseEntity<?> response = null;
         try {
-            this.getCommitService().addCommit(message, hash, author, null);
+            this.getCommitService().addCommit(message, hash, author, null );
             response = ResponseEntity.status(200).build();
         } catch(Exception e1){
             response = ResponseEntity.status(500).body("Hubo un error al insertar el usuario");

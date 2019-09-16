@@ -3,6 +3,7 @@ package info.unlp.edu.ar.bithub.model;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.Collections;
 import java.util.List;
 
 @Document(collection = "commit")
@@ -15,7 +16,6 @@ public class Commit {
     @DBRef
     private User author;
 
-    @DBRef
     private List<File> files;
 
 
@@ -31,6 +31,7 @@ public class Commit {
     public Commit(String message, String hash){
         this.message = message;
         this.hash = hash;
+        this.files= Collections.<File>emptyList();
     }
 
     public String getMessage() {

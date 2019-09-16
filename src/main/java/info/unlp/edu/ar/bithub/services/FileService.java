@@ -1,18 +1,24 @@
 package info.unlp.edu.ar.bithub.services;
 
+import info.unlp.edu.ar.bithub.model.Commit;
 import info.unlp.edu.ar.bithub.model.File;
+import info.unlp.edu.ar.bithub.repositories.CommitRepository.CommitRepository;
 import info.unlp.edu.ar.bithub.repositories.FileRepository.FileRepository;
+import org.bson.types.ObjectId;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.inject.Named;
 import java.util.List;
+import java.util.Optional;
 
 @Named
 public class FileService {
 
     @Autowired
     private FileRepository fileRepository;
+
+    private CommitRepository commitRepository;
 
     private RestHighLevelClient client;
 
@@ -26,8 +32,15 @@ public class FileService {
         return this.getFileRepository().findAll();
     }
 
-    public void addFile(String content, String filename){
+    public void addFile(ObjectId commit,String content, String filename) throws Exception {
         File file=new File(content,filename);
-        this.getFileRepository().save(file);
+        Optional<Commit> co =this.commitRepository.findById(commit);
+        if(co.isPresent()){
+            Commit commitAux= co.get();
+            commitAux.getFiles().add(file);
+            this.commitRepository.save(commitAux);
+        } else {
+            throw new Exception();
+        }
     }
 }
