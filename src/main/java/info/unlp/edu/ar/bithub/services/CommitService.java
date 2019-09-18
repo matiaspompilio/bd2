@@ -45,4 +45,8 @@ public class CommitService {
         this.getCommitRepository().save(commit);
     }
 
+    public void addCommit(String message, String hash, User author, List<File> files) {
+        Commit commit= new Commit(message, hash, author, files);
+        this.getCommitRepository().save(commit);
+    }
 }

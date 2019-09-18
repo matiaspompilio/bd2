@@ -24,6 +24,7 @@ public class FileMongoController {
         return this.getFileService().getAllFilesFromMongo();
     }
 
+    /*
     @PostMapping
     public ResponseEntity<?> addFile(@RequestParam(value = "content")String content,
                                      @RequestParam(value = "filename")String filename,
@@ -38,5 +39,8 @@ public class FileMongoController {
         }
         return response;
     }
+     El método de arriba era para agregar un file a un commit ya existente. Ccomo decidimos pasar
+     a armar los test y no armar completa la api de carga de datos esto queda en pausa.
+     */
 
 }
