@@ -47,8 +47,9 @@ public class FileService {
      a armar los test y no armar completa la api de carga de datos esto queda en pausa.
      */
 
-    public void addFile(String content, String filename) {
+    public File addFile(String content, String filename) {
         File file= new File(content,filename);
         this.getFileRepository().save(file);
+        return file;
     }
 }

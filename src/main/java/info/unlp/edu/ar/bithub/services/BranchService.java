@@ -21,8 +21,9 @@ public class BranchService {
         return this.getBranchRepository().findAll();
     }
 
-    public void addBranch(String name){
+    public Branch addBranch(String name){
         Branch branch = new Branch(name);
         this.branchRepository.save(branch);
+        return branch;
     }
 }
