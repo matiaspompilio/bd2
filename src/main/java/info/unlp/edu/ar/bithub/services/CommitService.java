@@ -10,6 +10,7 @@ import org.elasticsearch.client.RestHighLevelClient;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.inject.Named;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,6 +35,23 @@ public class CommitService {
         return this.getCommitRepository().findByAuthor(author);
     }
 
+    public List<File> getAllFilesFromAuthorFromMongo(ObjectId author){
+        List<Commit> commits= this.getCommitRepository().findByAuthor(author);
+        List<File> files= new java.util.ArrayList<>(Collections.emptyList());
+        commits.forEach((commit -> {
+            files.addAll(commit.getFiles());
+        }));
+        return files;
+    }
+    /*
+    Este método no anda porque el commit no tiene los datos del author ya que lo carga recién cuando lo mapea y antes sólo tiene el objectId porque está
+    con la annotation  @DbRef
+    public List<Commit> getAllCommitsByAuthorsNameFromMongo(String name){
+        return this.getCommitRepository().findByAuthor_Name(name);
+    }
+
+     */
+
     public void addCommit(String message, String hash, ObjectId userId, List<File> files) throws Exception {
         Commit commit= new Commit(message,hash);
         Optional<User> author = this.userRepository.findById(userId);
@@ -50,4 +68,6 @@ public class CommitService {
         this.getCommitRepository().save(commit);
         return commit;
     }
+
+
 }

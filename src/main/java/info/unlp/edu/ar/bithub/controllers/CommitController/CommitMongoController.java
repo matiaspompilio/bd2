@@ -44,4 +44,18 @@ public class CommitMongoController {
     public List<Commit> getAllCommitsByUser (@PathVariable ObjectId author){
         return this.getCommitService().getAllCommitsFromAuthorFromMongo(author);
     }
+
+    @GetMapping("/files/{author}")
+    public List<File> getAllFilesFromAuthor (@PathVariable ObjectId author){
+        return this.getCommitService().getAllFilesFromAuthorFromMongo(author);
+    }
+    /*
+    Este método no anda porque el commit no tiene los datos del author ya que lo carga recién cuando lo mapea y antes sólo tiene el objectId porque está
+    con la annotation  @DbRef
+    @GetMapping("name/{name}")
+    public List<Commit> getAllCommitsByAuthorName (@PathVariable String name){
+        return this.getCommitService().getAllCommitsByAuthorsNameFromMongo(name);
+    }
+
+     */
 }
