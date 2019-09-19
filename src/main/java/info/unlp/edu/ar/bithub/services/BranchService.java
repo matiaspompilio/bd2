@@ -30,6 +30,6 @@ public class BranchService {
 
     public Branch save(Branch branch){
         this.branchRepository.save(branch);
-        return branch
+        return branch;
     }
 }

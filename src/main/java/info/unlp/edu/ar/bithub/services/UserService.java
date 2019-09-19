@@ -24,16 +24,14 @@ public class UserService {
 
     private RestHighLevelClient client;
 
+    public UserService(){}
+
     public UserService(RestHighLevelClient client){
         this.client = client;
     }
 
-    private UserRepository getUserRepository(){
-        return this.userRepository;
-    }
-
     public List<User> getAllUsersFromMongo() {
-        return this.getUserRepository().findAll();
+        return this.userRepository.findAll();
     }
 
     public List<User> getAllUsersFromElastic(){
@@ -50,7 +48,7 @@ public class UserService {
     }
 
     public Optional<User> getUserFromMongo(ObjectId id) {
-        return this.getUserRepository().findById(id);
+        return this.userRepository.findById(id);
     }
 
     public Optional<User> getUserFromElastic(ObjectId id) {
@@ -66,8 +64,10 @@ public class UserService {
         return null;
     }
 
-    public void addUser(String name, String email) {
+    public User addUser(String name, String email) {
         User user = new User(name, email);
-        this.getUserRepository().save(user);
+        this.userRepository.save(user);
+        return user;
     }
+
 }
