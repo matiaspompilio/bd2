@@ -13,6 +13,7 @@ import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ public class UserService {
     @Autowired
     private MongoUserRepository mongoUserRepository;
 
-    @Autowired
+    @Inject
     private ElasticUserRepository elasticUserRepository;
 
 
