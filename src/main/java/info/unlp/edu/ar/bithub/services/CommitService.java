@@ -4,12 +4,14 @@ import info.unlp.edu.ar.bithub.model.Commit;
 import info.unlp.edu.ar.bithub.model.File;
 import info.unlp.edu.ar.bithub.model.User;
 import info.unlp.edu.ar.bithub.repositories.CommitRepository.CommitRepository;
+import info.unlp.edu.ar.bithub.repositories.CommitRepository.ElasticCommitRepository;
 import info.unlp.edu.ar.bithub.repositories.UserRepository.MongoUserRepository;
 import org.bson.types.ObjectId;
-import org.elasticsearch.client.RestHighLevelClient;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.inject.Inject;
 import javax.inject.Named;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -20,16 +22,30 @@ public class CommitService {
     @Autowired
     private CommitRepository commitRepository;
 
+    @Inject
+    private ElasticCommitRepository elasticCommitRepository;
+
     @Autowired
     private MongoUserRepository userRepository;
-
-    private RestHighLevelClient client;
-
-    public CommitService(RestHighLevelClient client) {this.client=client;}
 
     private CommitRepository getCommitRepository(){ return this.commitRepository;}
 
     public List<Commit> getAllCommitsFromMongo(){ return this.getCommitRepository().findAll();}
+
+    public List<Commit> getAllCommitsFromAuthorFromElastic(ObjectId id){
+        return this.elasticCommitRepository.getAllCommitsFromAuthorFromElastic(id);
+    }
+
+    public List<File> getAllFilesFromAuthorFromElastic(ObjectId id){
+        List<Commit> commits = this.getAllCommitsFromAuthorFromElastic(id);
+        List<File> files = new ArrayList<>();
+        for (Commit commit: commits) {
+            if (commit.getFiles() != null) {
+                files.addAll(commit.getFiles());
+            }
+        }
+        return files;
+    }
 
     public List<Commit> getAllCommitsFromAuthorFromMongo(ObjectId author){
         return this.getCommitRepository().findByAuthor(author);
