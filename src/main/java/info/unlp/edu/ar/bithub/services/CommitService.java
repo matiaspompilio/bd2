@@ -4,7 +4,7 @@ import info.unlp.edu.ar.bithub.model.Commit;
 import info.unlp.edu.ar.bithub.model.File;
 import info.unlp.edu.ar.bithub.model.User;
 import info.unlp.edu.ar.bithub.repositories.CommitRepository.CommitRepository;
-import info.unlp.edu.ar.bithub.repositories.UserRepository.UserRepository;
+import info.unlp.edu.ar.bithub.repositories.UserRepository.MongoUserRepository;
 import org.bson.types.ObjectId;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ public class CommitService {
     private CommitRepository commitRepository;
 
     @Autowired
-    private UserRepository userRepository;
+    private MongoUserRepository userRepository;
 
     private RestHighLevelClient client;
 
