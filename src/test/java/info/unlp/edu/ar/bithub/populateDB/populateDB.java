@@ -43,14 +43,18 @@ public class populateDB {
     public void populateWithDataFalopa(){
         Random random = new Random();
         List<Branch> branches = new ArrayList<>();
-        for (int i = 0; i < random.nextInt(10); i++) {
+        int rnd = random.nextInt(100);
+        for (int i = 0; i < rnd; i++) {
             branches.add(branchService.addBranch(faker.funnyName().name()));
         }
-        for (int i = 0; i < random.nextInt(100); i++) {
+        int rndUser = random.nextInt(1000);
+        for (int i = 0; i < rndUser; i++) {
             User user = userService.addUser(faker.name().fullName(),faker.internet().emailAddress());
-            for (int j = 0; j < random.nextInt(1000); j++) {
+            int rndCommit = random.nextInt(1000);
+            for (int j = 0; j < rndCommit; j++) {
                 List<File> files = new ArrayList<>();
-                for (int k = 0; k < random.nextInt(100); k++) {
+                int rndFile = random.nextInt(100);
+                for (int k = 0; k < rndFile; k++) {
                     files.add(
                         this.fileService.addFile(
                             faker.lorem().characters(10,100),faker.pokemon().name()+" "+faker.demographic().race()+" "+faker.lordOfTheRings().character()
