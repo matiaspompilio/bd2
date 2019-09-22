@@ -17,10 +17,6 @@ public class User {
 
     private String email;
 
-
-    @DBRef
-    private List<Commit> commits;
-
     public User() {}
 
     public User(String name, String email){
@@ -52,12 +48,4 @@ public class User {
         this.email = email;
     }
 
-
-    public List<Commit> getCommits() {
-        return commits;
-    }
-
-    public void setCommits(List<Commit> commits) {
-        this.commits = commits;
-    }
 }
