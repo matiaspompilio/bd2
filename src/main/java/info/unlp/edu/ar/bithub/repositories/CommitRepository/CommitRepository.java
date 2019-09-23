@@ -6,9 +6,9 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;
 
-public interface CommitRepository extends MongoRepository<Commit, ObjectId> {
+public interface CommitRepository extends MongoRepository<Commit, ObjectId>, CustomMongoCommitRepository {
 
     public List<Commit> findByAuthor(ObjectId author);
 
-    public List<Commit> findByAuthor_Name(String name);
+    public List<Commit> findByAuthorName(String name);
 }

@@ -47,7 +47,7 @@ public class populateDB {
         for (int i = 0; i < rnd; i++) {
             branches.add(branchService.addBranch(faker.funnyName().name()));
         }
-        int rndUser = random.nextInt(1000);
+        int rndUser = random.nextInt(100);
         for (int i = 0; i < rndUser; i++) {
             User user = userService.addUser(faker.name().fullName(),faker.internet().emailAddress());
             int rndCommit = random.nextInt(1000);

@@ -35,6 +35,10 @@ public class CommitService {
         return this.getCommitRepository().findByAuthor(author);
     }
 
+    public List<Commit> getAllCommitsByUserNameFromMongo(String name){
+        return this.getCommitRepository().findByUserName(name);
+    }
+
     public List<File> getAllFilesFromAuthorFromMongo(ObjectId author){
         List<Commit> commits= this.getCommitRepository().findByAuthor(author);
         List<File> files= new java.util.ArrayList<>(Collections.emptyList());

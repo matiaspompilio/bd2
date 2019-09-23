@@ -8,12 +8,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
-import java.util.Collections;
 import java.util.List;
 
 @RestController
 @RequestMapping("/mongo/commit")
 public class CommitMongoController {
+
     @Inject
     private CommitService commitService;
 
@@ -40,9 +40,14 @@ public class CommitMongoController {
         return response;
     }
 
-    @GetMapping("/{author}")
-    public List<Commit> getAllCommitsByUser (@PathVariable ObjectId author){
+    @GetMapping("/id/{author}")
+    public List<Commit> getAllCommitsByUserId (@PathVariable ObjectId author){
         return this.getCommitService().getAllCommitsFromAuthorFromMongo(author);
+    }
+
+    @GetMapping("/name/{name}")
+    public List<Commit> getAllCommitsByUserName (@PathVariable String name){
+        return this.getCommitService().getAllCommitsByUserNameFromMongo(name);
     }
 
     @GetMapping("/files/{author}")

@@ -4,18 +4,9 @@ import info.unlp.edu.ar.bithub.model.User;
 import info.unlp.edu.ar.bithub.repositories.UserRepository.ElasticUserRepository;
 import info.unlp.edu.ar.bithub.repositories.UserRepository.MongoUserRepository;
 import org.bson.types.ObjectId;
-import org.elasticsearch.action.search.SearchRequest;
-import org.elasticsearch.action.search.SearchResponse;
-import org.elasticsearch.client.RequestOptions;
-import org.elasticsearch.index.query.MatchQueryBuilder;
-import org.elasticsearch.index.query.QueryBuilders;
-import org.elasticsearch.search.SearchHit;
-import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.inject.Named;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 @Named
@@ -26,6 +17,7 @@ public class UserService {
 
     @Autowired
     private ElasticUserRepository elasticUserRepository;
+
 
 
     public UserService(){}
