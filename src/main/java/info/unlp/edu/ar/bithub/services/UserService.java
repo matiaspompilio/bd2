@@ -47,6 +47,10 @@ public class UserService {
         return this.elasticUserRepository.getUserFromElastic(id);
     }
 
+    public List<User> getUsersByNameFromElastic(String name){
+        return this.elasticUserRepository.getUsersByNameFromElastic(name);
+    }
+
     public User addUser(String name, String email) {
         User user = new User(name, email);
         this.mongoUserRepository.save(user);
