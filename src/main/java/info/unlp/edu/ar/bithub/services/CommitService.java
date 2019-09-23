@@ -36,6 +36,10 @@ public class CommitService {
         return this.elasticCommitRepository.getAllCommitsFromAuthorFromElastic(id);
     }
 
+    public List<Commit> getAllCommitsByUserNameFromElastic(String name){
+        return this.elasticCommitRepository.getAllCommitsByUserNameFromElastic(name);
+    }
+
     public List<File> getAllFilesFromAuthorFromElastic(ObjectId id){
         List<Commit> commits = this.getAllCommitsFromAuthorFromElastic(id);
         List<File> files = new ArrayList<>();

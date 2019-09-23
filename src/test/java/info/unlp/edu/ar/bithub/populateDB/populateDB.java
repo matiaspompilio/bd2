@@ -43,14 +43,14 @@ public class populateDB {
     public void populateWithDataFalopa(){
         Random random = new Random();
         List<Branch> branches = new ArrayList<>();
-        int rnd = random.nextInt(100);
+        int rnd = random.nextInt(25);
         for (int i = 0; i < rnd; i++) {
             branches.add(branchService.addBranch(faker.funnyName().name()));
         }
-        int rndUser = random.nextInt(1000);
+        int rndUser = random.nextInt(10);
         for (int i = 0; i < rndUser; i++) {
             User user = userService.addUser(faker.name().fullName(),faker.internet().emailAddress());
-            int rndCommit = random.nextInt(1000);
+            int rndCommit = random.nextInt(100);
             for (int j = 0; j < rndCommit; j++) {
                 List<File> files = new ArrayList<>();
                 int rndFile = random.nextInt(100);

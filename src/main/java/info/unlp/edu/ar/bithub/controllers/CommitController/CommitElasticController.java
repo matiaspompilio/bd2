@@ -19,7 +19,7 @@ public class CommitElasticController {
     @Inject
     private CommitService commitService;
 
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public List<Commit> getAllCommitsFromAuthorFromElastic (@PathVariable ObjectId id){
         return this.commitService.getAllCommitsFromAuthorFromElastic(id);
     }
@@ -27,5 +27,10 @@ public class CommitElasticController {
     @GetMapping("/files/{id}")
     public List<File> getAllFilesFromAuthor (@PathVariable ObjectId id){
         return commitService.getAllFilesFromAuthorFromElastic(id);
+    }
+
+    @GetMapping("/name/{name}")
+    public List<Commit> getAllCommitsByUserNameFromElastic (@PathVariable String name){
+        return commitService.getAllCommitsByUserNameFromElastic(name);
     }
 }

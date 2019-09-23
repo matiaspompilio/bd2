@@ -44,4 +44,25 @@ public class ElasticCommitRepository {
         }
         return commits;
     }
+
+    public List<Commit> getAllCommitsByUserNameFromElastic(String name){
+//        SearchRequest searchRequest = new SearchRequest("bd2.commit");
+//        SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
+//        searchSourceBuilder.query(QueryBuilders.matchQuery("author.$id",id.toString()));
+//        searchRequest.source(searchSourceBuilder.size(1000));
+//        SearchResponse searchResponse;
+//        List<Commit> commits = new ArrayList<>();
+//        try {
+//            searchResponse = client.search(searchRequest, RequestOptions.DEFAULT);
+//            SearchHit[] hits = searchResponse.getHits().getHits();
+//            for (SearchHit hit:hits) {
+//                String json = hit.getSourceAsString();
+//                commits.add(gson.fromJson(json, Commit.class));
+//            }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        return commits;
+        return null;
+    }
 }
