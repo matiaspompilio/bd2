@@ -6,6 +6,7 @@ import info.unlp.edu.ar.bithub.repositories.UserRepository.MongoUserRepository;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.List;
 import java.util.Optional;
@@ -15,7 +16,7 @@ public class UserService {
     @Autowired
     private MongoUserRepository mongoUserRepository;
 
-    @Autowired
+    @Inject
     private ElasticUserRepository elasticUserRepository;
 
 

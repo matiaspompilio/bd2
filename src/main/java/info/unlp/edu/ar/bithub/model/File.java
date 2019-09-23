@@ -11,8 +11,6 @@ public class File {
 
     private String content;
 
-    private Commit commit;
-
 
     public File(){}
 
@@ -34,15 +32,5 @@ public class File {
     public void setContent(String content) {
         this.content = content;
     }
-
-
-    public Commit getCommit() {
-        return commit;
-    }
-
-    public void setCommit(Commit commit) {
-        this.commit = commit;
-    }
-
 
 }

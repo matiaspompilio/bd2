@@ -13,11 +13,13 @@ import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.inject.Named;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Named
 public class ElasticUserRepository {
 
     private Gson gson = new Gson();
@@ -46,15 +48,20 @@ public class ElasticUserRepository {
     }
 
     public Optional<User> getUserFromElastic(ObjectId id) {
-        SearchRequest searchRequest = new SearchRequest("user");
+        SearchRequest searchRequest = new SearchRequest("bd2.user");
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
-        searchSourceBuilder.query(new MatchQueryBuilder("id",id));
-        searchRequest.source(searchSourceBuilder);
+        searchSourceBuilder.query(QueryBuilders.termQuery("_id",id.toString()));
+        searchRequest.source(searchSourceBuilder.size(1));
+        SearchResponse searchResponse;
+        Optional<User> user = Optional.of(new User());
         try {
-            SearchResponse searchResponse = client.search(searchRequest,RequestOptions.DEFAULT);
+            searchResponse = client.search(searchRequest, RequestOptions.DEFAULT);
+            SearchHit hit = searchResponse.getHits().getHits()[0];
+            String json = hit.getSourceAsString();
+            user = Optional.of(gson.fromJson(json, User.class));
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return null;
+        return user;
     }
 }
