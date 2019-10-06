@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Named
 public class CommitService {
@@ -39,10 +40,17 @@ public class CommitService {
         return this.elasticCommitRepository.getAllCommitsFromAuthorFromElastic(id);
     }
 
+    public List<Commit> getAllCommitsFromListOfAuthorsFromElastic(List<String> ids){
+        return this.elasticCommitRepository.getAllCommitsFromListOfAuthorsFromElastic(ids);
+    }
+
+
     public List<Commit> getAllCommitsByUserNameFromElastic(String name){
         List<User> users = this.userService.getUsersByNameFromElastic(name);
         List<Commit> commits = new ArrayList<>();
-        users.forEach(user -> commits.addAll(this.getAllCommitsFromAuthorFromElastic(user.getId())));
+//        users.forEach(user -> commits.addAll(this.getAllCommitsFromAuthorFromElastic(user.getId())));
+        List<String> ids = users.stream().map(user -> user.getId().toString()).collect(Collectors.toList());
+        commits = this.getAllCommitsFromListOfAuthorsFromElastic(ids);
         return commits;
     }
 
@@ -55,6 +63,10 @@ public class CommitService {
             }
         }
         return files;
+    }
+
+    public int getAmountOfFilesFromElastic(){
+        return elasticCommitRepository.getAmountOfFilesFromElastic();
     }
 
     public List<Commit> getAllCommitsFromAuthorFromMongo(ObjectId author){

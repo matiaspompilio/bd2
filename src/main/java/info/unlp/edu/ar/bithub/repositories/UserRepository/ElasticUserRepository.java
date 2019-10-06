@@ -78,7 +78,10 @@ public class ElasticUserRepository {
             SearchHit[] hits = searchResponse.getHits().getHits();
             for (SearchHit hit:hits) {
                 String json = hit.getSourceAsString();
-                users.add(gson.fromJson(json, User.class));
+                User user = gson.fromJson(json, User.class);
+                ObjectId objId = new ObjectId(hit.getId());
+                user.setId(objId);
+                users.add(user);
             }
         } catch (IOException e) {
             e.printStackTrace();

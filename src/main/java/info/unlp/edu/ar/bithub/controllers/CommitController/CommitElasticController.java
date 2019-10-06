@@ -33,4 +33,9 @@ public class CommitElasticController {
     public List<Commit> getAllCommitsByUserNameFromElastic (@PathVariable String name){
         return commitService.getAllCommitsByUserNameFromElastic(name);
     }
+
+    @GetMapping("/files/amount")
+    public int getAmountOfFilesFromElastic (){
+        return commitService.getAmountOfFilesFromElastic();
+    }
 }
