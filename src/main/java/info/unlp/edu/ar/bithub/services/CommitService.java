@@ -22,6 +22,9 @@ public class CommitService {
     @Autowired
     private CommitRepository commitRepository;
 
+    @Autowired
+    private UserService userService;
+
     @Inject
     private ElasticCommitRepository elasticCommitRepository;
 
@@ -34,6 +37,13 @@ public class CommitService {
 
     public List<Commit> getAllCommitsFromAuthorFromElastic(ObjectId id){
         return this.elasticCommitRepository.getAllCommitsFromAuthorFromElastic(id);
+    }
+
+    public List<Commit> getAllCommitsByUserNameFromElastic(String name){
+        List<User> users = this.userService.getUsersByNameFromElastic(name);
+        List<Commit> commits = new ArrayList<>();
+        users.forEach(user -> commits.addAll(this.getAllCommitsFromAuthorFromElastic(user.getId())));
+        return commits;
     }
 
     public List<File> getAllFilesFromAuthorFromElastic(ObjectId id){
