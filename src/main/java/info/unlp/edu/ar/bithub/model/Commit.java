@@ -24,15 +24,14 @@ public class Commit {
 
     private String hash;
 
-    @DBRef
-    private User author;
+    private ObjectId author;
 
     private List<File> files;
 
 
     public Commit(){}
 
-    public Commit(String message, String hash, User author, List<File> files){
+    public Commit(String message, String hash, ObjectId author, List<File> files){
         this.message = message;
         this.hash = hash;
         this.author = author;
@@ -61,11 +60,11 @@ public class Commit {
         this.hash = hash;
     }
 
-    public User getAuthor() {
+    public ObjectId getAuthor() {
         return author;
     }
 
-    public void setAuthor(User author) {
+    public void setAuthor(ObjectId author) {
         this.author = author;
     }
 

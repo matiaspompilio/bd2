@@ -2,6 +2,7 @@ package info.unlp.edu.ar.bithub.controllers.CommitController;
 
 import info.unlp.edu.ar.bithub.model.Commit;
 import info.unlp.edu.ar.bithub.model.File;
+import info.unlp.edu.ar.bithub.model.User;
 import info.unlp.edu.ar.bithub.services.CommitService;
 import org.bson.types.ObjectId;
 import org.springframework.http.ResponseEntity;
@@ -49,13 +50,12 @@ public class CommitMongoController {
     public List<File> getAllFilesFromAuthor (@PathVariable ObjectId author){
         return this.getCommitService().getAllFilesFromAuthorFromMongo(author);
     }
-    /*
-    Este método no anda porque el commit no tiene los datos del author ya que lo carga recién cuando lo mapea y antes sólo tiene el objectId porque está
-    con la annotation  @DbRef
+
+
     @GetMapping("name/{name}")
     public List<Commit> getAllCommitsByAuthorName (@PathVariable String name){
         return this.getCommitService().getAllCommitsByAuthorsNameFromMongo(name);
     }
 
-     */
+
 }

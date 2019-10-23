@@ -10,5 +10,6 @@ public interface CommitRepository extends MongoRepository<Commit, ObjectId> {
 
     public List<Commit> findByAuthor(ObjectId author);
 
-    public List<Commit> findByAuthor_Name(String name);
+    public List<Commit> findByAuthorIn(List<ObjectId> ids);
+
 }

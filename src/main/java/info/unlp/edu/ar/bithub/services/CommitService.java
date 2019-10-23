@@ -1,5 +1,6 @@
 package info.unlp.edu.ar.bithub.services;
 
+import com.mongodb.BasicDBObject;
 import info.unlp.edu.ar.bithub.model.Commit;
 import info.unlp.edu.ar.bithub.model.File;
 import info.unlp.edu.ar.bithub.model.User;
@@ -8,6 +9,10 @@ import info.unlp.edu.ar.bithub.repositories.CommitRepository.ElasticCommitReposi
 import info.unlp.edu.ar.bithub.repositories.UserRepository.MongoUserRepository;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.aggregation.Aggregation;
+import org.springframework.data.mongodb.core.aggregation.AggregationOperation;
+import org.springframework.data.mongodb.core.aggregation.LookupOperation;
+import org.springframework.data.mongodb.core.query.Criteria;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -81,20 +86,18 @@ public class CommitService {
         }));
         return files;
     }
-    /*
-    Este método no anda porque el commit no tiene los datos del author ya que lo carga recién cuando lo mapea y antes sólo tiene el objectId porque está
-    con la annotation  @DbRef
-    public List<Commit> getAllCommitsByAuthorsNameFromMongo(String name){
-        return this.getCommitRepository().findByAuthor_Name(name);
-    }
 
-     */
+    public List<Commit> getAllCommitsByAuthorsNameFromMongo(String name) {
+       List<User> users= this.userService.getUsersByNameFromMongo(name);
+        List<ObjectId> ids = users.stream().map(User::getId).collect(Collectors.toList());
+       return this.getCommitRepository().findByAuthorIn(ids);
+    }
 
     public void addCommit(String message, String hash, ObjectId userId, List<File> files) throws Exception {
         Commit commit= new Commit(message,hash);
         Optional<User> author = this.userRepository.findById(userId);
         if(author.isPresent()){
-            commit.setAuthor(author.get());
+            commit.setAuthor(author.get().getId());
         }else {
             throw new Exception();
         }
@@ -102,7 +105,7 @@ public class CommitService {
     }
 
     public Commit addCommit(String message, String hash, User author, List<File> files) {
-        Commit commit= new Commit(message, hash, author, files);
+        Commit commit= new Commit(message, hash, author.getId(), files);
         this.getCommitRepository().save(commit);
         return commit;
     }
