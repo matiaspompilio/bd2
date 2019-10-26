@@ -9,14 +9,14 @@ import java.util.List;
 @Document(collection = "commit")
 public class Commit {
 
-    private Long _id;
+    private ObjectId id;
 
-    public Long get_id() {
-        return _id;
+    public ObjectId getId() {
+        return id;
     }
 
-    public void set_id(Long _id) {
-        this._id = _id;
+    public void setId(ObjectId id) {
+        this.id = id;
     }
 
     private String message;
