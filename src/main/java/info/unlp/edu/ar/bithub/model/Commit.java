@@ -1,7 +1,6 @@
 package info.unlp.edu.ar.bithub.model;
 
 import org.bson.types.ObjectId;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Collections;
@@ -10,14 +9,14 @@ import java.util.List;
 @Document(collection = "commit")
 public class Commit {
 
-    private ObjectId id;
+    private Long _id;
 
-    public ObjectId getId() {
-        return id;
+    public Long get_id() {
+        return _id;
     }
 
-    public void setId(ObjectId id) {
-        this.id = id;
+    public void set_id(Long _id) {
+        this._id = _id;
     }
 
     private String message;
