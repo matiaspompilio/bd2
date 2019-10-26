@@ -19,7 +19,7 @@ public class CommitElasticController {
     @Inject
     private CommitService commitService;
 
-    @GetMapping("/id/{id}")
+    @GetMapping("/authorId/{id}")
     public List<Commit> getAllCommitsFromAuthorFromElastic (@PathVariable ObjectId id){
         return this.commitService.getAllCommitsFromAuthorFromElastic(id);
     }

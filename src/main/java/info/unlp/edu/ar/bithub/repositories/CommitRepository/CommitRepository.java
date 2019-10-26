@@ -8,8 +8,8 @@ import java.util.List;
 
 public interface CommitRepository extends MongoRepository<Commit, ObjectId> {
 
-    public List<Commit> findByAuthor(ObjectId author);
+    public List<Commit> findByAuthor(String author);
 
-    public List<Commit> findByAuthorIn(List<ObjectId> ids);
+    public List<Commit> findByAuthorIn(List<String> ids);
 
 }

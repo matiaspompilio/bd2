@@ -75,11 +75,11 @@ public class CommitService {
     }
 
     public List<Commit> getAllCommitsFromAuthorFromMongo(ObjectId author){
-        return this.getCommitRepository().findByAuthor(author);
+        return this.getCommitRepository().findByAuthor(author.toString());
     }
 
     public List<File> getAllFilesFromAuthorFromMongo(ObjectId author){
-        List<Commit> commits= this.getCommitRepository().findByAuthor(author);
+        List<Commit> commits= this.getCommitRepository().findByAuthor(author.toString());
         List<File> files= new java.util.ArrayList<>(Collections.emptyList());
         commits.forEach((commit -> {
             files.addAll(commit.getFiles());
@@ -89,7 +89,7 @@ public class CommitService {
 
     public List<Commit> getAllCommitsByAuthorsNameFromMongo(String name) {
        List<User> users= this.userService.getUsersByNameFromMongo(name);
-        List<ObjectId> ids = users.stream().map(User::getId).collect(Collectors.toList());
+        List<String> ids = users.stream().map(user -> user.getId().toString()).collect(Collectors.toList());
        return this.getCommitRepository().findByAuthorIn(ids);
     }
 
