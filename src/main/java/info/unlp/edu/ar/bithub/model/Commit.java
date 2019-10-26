@@ -1,7 +1,6 @@
 package info.unlp.edu.ar.bithub.model;
 
 import org.bson.types.ObjectId;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Collections;
