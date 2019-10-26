@@ -1,23 +1,19 @@
 package info.unlp.edu.ar.bithub.services;
 
-import info.unlp.edu.ar.bithub.model.Commit;
 import info.unlp.edu.ar.bithub.model.File;
-import info.unlp.edu.ar.bithub.model.User;
 import info.unlp.edu.ar.bithub.repositories.CommitRepository.CommitRepository;
-import info.unlp.edu.ar.bithub.repositories.FileRepository.FileRepository;
-import org.bson.types.ObjectId;
+import info.unlp.edu.ar.bithub.repositories.FileRepository.MongoFileRepository;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.inject.Named;
 import java.util.List;
-import java.util.Optional;
 
 @Named
 public class FileService {
 
     @Autowired
-    private FileRepository fileRepository;
+    private MongoFileRepository mongoFileRepository;
 
     @Autowired
     private CommitRepository commitRepository;
@@ -28,10 +24,10 @@ public class FileService {
         this.client=client;
     }
 
-    private FileRepository getFileRepository(){ return this.fileRepository;}
+    private MongoFileRepository getMongoFileRepository(){ return this.mongoFileRepository;}
 
     public List<File> getAllFilesFromMongo(){
-        return this.getFileRepository().findAll();
+        return this.getMongoFileRepository().findAll();
     }
     /*
     public void addFile(ObjectId commit,String content, String filename) throws Exception {
@@ -46,6 +42,9 @@ public class FileService {
      El método de arriba era para agregar un file a un commit ya existente. Ccomo decidimos pasar
      a armar los test y no armar completa la api de carga de datos esto queda en pausa.
      */
+    public List<File> getByContentFromMongo(String content){
+        return this.getMongoFileRepository().findByContentRegex(content);
+    }
 
     public File addFile(String content, String filename) {
         File file= new File(content,filename);

@@ -24,6 +24,10 @@ public class FileMongoController {
         return this.getFileService().getAllFilesFromMongo();
     }
 
+    @GetMapping("/{content}")
+    public List<File> getByContentFromMongo(@PathVariable String content){
+        return this.getFileService().getByContentFromMongo(content);
+    }
     /*
     @PostMapping
     public ResponseEntity<?> addFile(@RequestParam(value = "content")String content,
