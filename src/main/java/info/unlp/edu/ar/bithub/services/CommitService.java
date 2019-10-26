@@ -1,6 +1,5 @@
 package info.unlp.edu.ar.bithub.services;
 
-import com.mongodb.BasicDBObject;
 import info.unlp.edu.ar.bithub.model.Commit;
 import info.unlp.edu.ar.bithub.model.File;
 import info.unlp.edu.ar.bithub.model.User;
@@ -9,10 +8,6 @@ import info.unlp.edu.ar.bithub.repositories.CommitRepository.ElasticCommitReposi
 import info.unlp.edu.ar.bithub.repositories.UserRepository.MongoUserRepository;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.aggregation.Aggregation;
-import org.springframework.data.mongodb.core.aggregation.AggregationOperation;
-import org.springframework.data.mongodb.core.aggregation.LookupOperation;
-import org.springframework.data.mongodb.core.query.Criteria;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -52,8 +47,7 @@ public class CommitService {
 
     public List<Commit> getAllCommitsByUserNameFromElastic(String name){
         List<User> users = this.userService.getUsersByNameFromElastic(name);
-        List<Commit> commits = new ArrayList<>();
-//        users.forEach(user -> commits.addAll(this.getAllCommitsFromAuthorFromElastic(user.getId())));
+        List<Commit> commits;
         List<String> ids = users.stream().map(user -> user.getId().toString()).collect(Collectors.toList());
         commits = this.getAllCommitsFromListOfAuthorsFromElastic(ids);
         return commits;
