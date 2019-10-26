@@ -24,14 +24,14 @@ public class Commit {
 
     private String hash;
 
-    private ObjectId author;
+    private String author;
 
     private List<File> files;
 
 
     public Commit(){}
 
-    public Commit(String message, String hash, ObjectId author, List<File> files){
+    public Commit(String message, String hash, String author, List<File> files){
         this.message = message;
         this.hash = hash;
         this.author = author;
@@ -60,11 +60,11 @@ public class Commit {
         this.hash = hash;
     }
 
-    public ObjectId getAuthor() {
+    public String getAuthor() {
         return author;
     }
 
-    public void setAuthor(ObjectId author) {
+    public void setAuthor(String author) {
         this.author = author;
     }
 

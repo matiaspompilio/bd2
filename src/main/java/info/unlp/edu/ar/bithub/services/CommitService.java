@@ -97,7 +97,7 @@ public class CommitService {
         Commit commit= new Commit(message,hash);
         Optional<User> author = this.userRepository.findById(userId);
         if(author.isPresent()){
-            commit.setAuthor(author.get().getId());
+            commit.setAuthor(author.get().getId().toString());
         }else {
             throw new Exception();
         }
@@ -105,7 +105,7 @@ public class CommitService {
     }
 
     public Commit addCommit(String message, String hash, User author, List<File> files) {
-        Commit commit= new Commit(message, hash, author.getId(), files);
+        Commit commit= new Commit(message, hash, author.getId().toString(), files);
         this.getCommitRepository().save(commit);
         return commit;
     }

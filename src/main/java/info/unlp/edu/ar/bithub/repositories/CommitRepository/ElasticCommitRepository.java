@@ -31,7 +31,7 @@ public class ElasticCommitRepository {
     public List<Commit> getAllCommitsFromAuthorFromElastic(ObjectId id){
         SearchRequest searchRequest = new SearchRequest("bd2.commit");
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
-        searchSourceBuilder.query(QueryBuilders.termQuery("author.$id",id.toString()));
+        searchSourceBuilder.query(QueryBuilders.termQuery("author",id.toString()));
         searchRequest.source(searchSourceBuilder.size(1000));
         SearchResponse searchResponse;
         List<Commit> commits = new ArrayList<>();
@@ -51,7 +51,7 @@ public class ElasticCommitRepository {
     public List<Commit> getAllCommitsFromListOfAuthorsFromElastic(List<String> ids){
         SearchRequest searchRequest = new SearchRequest("bd2.commit");
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
-        searchSourceBuilder.query(new TermsQueryBuilder("author.$id",ids));
+        searchSourceBuilder.query(new TermsQueryBuilder("author",ids));
         searchRequest.source(searchSourceBuilder.size(1000));
         SearchResponse searchResponse;
         List<Commit> commits = new ArrayList<>();
