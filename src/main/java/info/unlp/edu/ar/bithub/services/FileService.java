@@ -5,6 +5,7 @@ import info.unlp.edu.ar.bithub.repositories.FileRepository.ElasticFileRepository
 import info.unlp.edu.ar.bithub.repositories.FileRepository.MongoFileRepository;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 
 import javax.inject.Named;
 import java.util.List;
@@ -31,7 +32,7 @@ public class FileService {
     }
 
     public List<File> getByContentFromMongo(String content){
-        return this.getMongoFileRepository().findByContentRegex(content);
+        return this.getMongoFileRepository().findByContentRegex(content, PageRequest.of(0, 10));
     }
 
     public File addFile(String content, String filename) {
