@@ -30,11 +30,14 @@ public class ElasticFileRepository {
         SearchRequest searchRequest = new SearchRequest("bd2.file");
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
         searchSourceBuilder.query(new MatchQueryBuilder("content", content));
-        searchRequest.source(searchSourceBuilder.size(10000));
+        searchRequest.source(searchSourceBuilder.size(100));
         SearchResponse searchResponse;
         List<File> files = new ArrayList<>();
         try {
+            int timeStart = (int) System.currentTimeMillis();
             searchResponse = client.search(searchRequest, RequestOptions.DEFAULT);
+            int timeEnd = (int) System.currentTimeMillis();
+            System.out.println("Se tardó: " + (timeEnd - timeStart)/1000 + " segundos.");
             SearchHit[] hits = searchResponse.getHits().getHits();
             for (SearchHit hit : hits) {
                 String json = hit.getSourceAsString();

@@ -45,7 +45,7 @@ public class populateDB {
         Random random = new Random();
         int rndFile = random.nextInt(1000000);
         for (int k = 0; k < rndFile; k++) {
-            File file = new File(faker.funnyName().name()+ " " +faker.animal().name() + " " + faker.cat().name(),
+            File file = new File(faker.backToTheFuture().quote()+ " " +faker.animal().name() + " " + faker.cat().name() + " "+ faker.harryPotter().quote() +" "+ faker.pokemon().location(),
                     faker.pokemon().name()+" "+faker.demographic().race()+" "+faker.lordOfTheRings().character());
             this.fileService.save(file);
         }
