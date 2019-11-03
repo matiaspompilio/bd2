@@ -39,6 +39,18 @@ public class populateDB {
 
     Faker faker = new Faker();
 
+
+    @Test
+    public void ppulateWithFiles(){
+        Random random = new Random();
+        int rndFile = random.nextInt(1000000);
+        for (int k = 0; k < rndFile; k++) {
+            File file = new File(faker.funnyName().name()+ " " +faker.animal().name() + " " + faker.cat().name(),
+                    faker.pokemon().name()+" "+faker.demographic().race()+" "+faker.lordOfTheRings().character());
+            this.fileService.save(file);
+        }
+    }
+
     @Test
     public void populateWithDataFalopa(){
         Random random = new Random();
@@ -47,17 +59,18 @@ public class populateDB {
         for (int i = 0; i < rnd; i++) {
             branches.add(branchService.addBranch(faker.funnyName().name()));
         }
-        int rndUser = random.nextInt(20);
+        int rndUser = random.nextInt(50);
         for (int i = 0; i < rndUser; i++) {
             User user = userService.addUser(faker.name().fullName(),faker.internet().emailAddress());
             int rndCommit = random.nextInt(100);
             for (int j = 0; j < rndCommit; j++) {
                 List<File> files = new ArrayList<>();
-                int rndFile = random.nextInt(100);
+                int rndFile = random.nextInt(1000);
                 for (int k = 0; k < rndFile; k++) {
                     files.add(
                         this.fileService.addFile(
-                            faker.lorem().characters(10,100),faker.pokemon().name()+" "+faker.demographic().race()+" "+faker.lordOfTheRings().character()
+                            faker.funnyName().name()+ " " +faker.animal().name() + " " + faker.cat().name() + " "+ faker.harryPotter().quote() +" "+ faker.pokemon().location(),
+                                faker.pokemon().name()+" "+faker.demographic().race()+" "+faker.lordOfTheRings().character()
                         )
                     );
                 }

@@ -2,6 +2,7 @@ package info.unlp.edu.ar.bithub.repositories.CommitRepository;
 
 import com.google.gson.Gson;
 import info.unlp.edu.ar.bithub.model.Commit;
+import info.unlp.edu.ar.bithub.model.File;
 import org.bson.types.ObjectId;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
@@ -9,6 +10,7 @@ import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.index.query.MatchQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.index.query.TermQueryBuilder;
 import org.elasticsearch.index.query.TermsQueryBuilder;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.aggregations.AggregationBuilders;
@@ -89,4 +91,23 @@ public class ElasticCommitRepository {
         return 0;
     }
 
+//    public List<File> getFilesByContentFromElastic(String content) {
+//        SearchRequest searchRequest = new SearchRequest("bd2.commit");
+//        SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
+//        searchSourceBuilder.query(new TermQueryBuilder("file", content));
+//        searchRequest.source(searchSourceBuilder.size(1000));
+//        SearchResponse searchResponse;
+//        List<Commit> commits = new ArrayList<>();
+//        try {
+//            searchResponse = client.search(searchRequest, RequestOptions.DEFAULT);
+//            SearchHit[] hits = searchResponse.getHits().getHits();
+//            for (SearchHit hit : hits) {
+//                String json = hit.getSourceAsString();
+//                commits.add(gson.fromJson(json, Commit.class));
+//            }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        return commits;
+//    }
 }
