@@ -37,7 +37,7 @@ public class ElasticFileRepository {
             int timeStart = (int) System.currentTimeMillis();
             searchResponse = client.search(searchRequest, RequestOptions.DEFAULT);
             int timeEnd = (int) System.currentTimeMillis();
-            System.out.println("Se tardó: " + (timeEnd - timeStart)/1000 + " segundos.");
+            System.out.println("Se tardó: " + (timeEnd - timeStart) + " en elastic.");
             SearchHit[] hits = searchResponse.getHits().getHits();
             for (SearchHit hit : hits) {
                 String json = hit.getSourceAsString();

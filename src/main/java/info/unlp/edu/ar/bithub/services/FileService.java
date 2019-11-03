@@ -32,7 +32,11 @@ public class FileService {
     }
 
     public List<File> getByContentFromMongo(String content){
-        return this.getMongoFileRepository().findByContentRegex(content, PageRequest.of(0, 10));
+        int timeStart = (int) System.currentTimeMillis();
+        List<File> files = this.getMongoFileRepository().findByContentRegex(content, PageRequest.of(0, 100));
+        int timeEnd = (int) System.currentTimeMillis();
+        System.out.println("Se tardó: " + (timeEnd - timeStart) + " en mongo.");
+        return files;
     }
 
     public File addFile(String content, String filename) {
