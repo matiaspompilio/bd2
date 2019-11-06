@@ -52,4 +52,8 @@ public class FileService {
     public File save(File file){
         return this.mongoFileRepository.save(file);
     }
+
+    public List<File> getByIncludedContentAndNotByExcludedContentFromElastic(String includedContent, String excludedContent){
+        return this.elasticFileRepository.getByIncludedContentAndNotByExcludedContentFromElastic(includedContent,excludedContent);
+    }
 }

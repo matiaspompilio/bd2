@@ -24,5 +24,9 @@ public class FileElasticController {
         return fileService.getByContentFromElastic(content);
     }
 
+    @GetMapping("/{includedContent}/{excludedContent}")
+    public List<File> getByIncludedContentAndNotByExcludedContentFromElastic(@PathVariable String includedContent, @PathVariable String excludedContent){
+        return fileService.getByIncludedContentAndNotByExcludedContentFromElastic(includedContent,excludedContent);
+    }
 
 }
