@@ -52,6 +52,18 @@ public class populateDB {
     }
 
     @Test
+    public void populateWithFilesMoreContent(){
+        Random random = new Random();
+        int rndFile = 500000;
+        for (int k = 0; k < rndFile; k++) {
+            File file = new File(faker.backToTheFuture().quote()+ " " +faker.animal().name() + " " + faker.cat().name() + " "+ faker.harryPotter().quote() +" "+ faker.pokemon().location() + faker.internet() + faker.internet() + faker.elderScrolls().quote() + faker.gameOfThrones().quote() + faker.backToTheFuture().quote() + faker.hitchhikersGuideToTheGalaxy().quote() + faker.ancient().god() + faker.harryPotter().quote() + faker.chuckNorris().fact() + faker.internet() + faker.internet() + faker.elderScrolls().quote() + faker.gameOfThrones().quote() + faker.backToTheFuture().quote() + faker.hitchhikersGuideToTheGalaxy().quote() + faker.ancient().god() + faker.harryPotter().quote() + faker.chuckNorris().fact(),
+                    faker.pokemon().name()+" "+faker.demographic().race()+" "+faker.lordOfTheRings().character()  );
+            this.fileService.save(file);
+        }
+    }
+
+
+    @Test
     public void populateWithDataFalopa(){
         Random random = new Random();
         List<Branch> branches = new ArrayList<>();
