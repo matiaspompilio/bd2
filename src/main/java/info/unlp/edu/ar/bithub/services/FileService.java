@@ -61,7 +61,7 @@ public class FileService {
 
     public List<File> getByIncludedContentAndNotByExcludedContentFromMongo(String includedContent, String excludedContent) {
         int timeStart = (int) System.currentTimeMillis();
-        List <File> files = this.mongoFileRepository.getByIncludedContentAndNotByExcludedContentFromMongo(includedContent, excludedContent);
+        List <File> files = this.mongoFileRepository.getByIncludedContentAndNotByExcludedContentFromMongo(includedContent, excludedContent,PageRequest.of(0, 100));
         int timeEnd = (int) System.currentTimeMillis();
         System.out.println("Se tardó: " + (timeEnd - timeStart) + " en mongo.");
         return files;
@@ -70,7 +70,7 @@ public class FileService {
     public List<File> getTextIncludedContentAndNotExcludedContentFromMongo(String includedContent, String excludedContent) {
         TextCriteria criteria = TextCriteria.forDefaultLanguage().matchingAny(includedContent).notMatching(excludedContent);
         int timeStart = (int) System.currentTimeMillis();
-        List <File> files = this.mongoFileRepository.findAllBy(criteria);
+        List <File> files = this.mongoFileRepository.findAllBy(criteria, PageRequest.of(0, 100));
         int timeEnd = (int) System.currentTimeMillis();
         System.out.println("Se tardó: " + (timeEnd - timeStart) + " en mongo indexado.");
         return files;

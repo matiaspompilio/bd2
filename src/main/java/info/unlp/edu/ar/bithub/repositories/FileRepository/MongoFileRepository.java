@@ -17,7 +17,7 @@ public interface MongoFileRepository extends MongoRepository<File, ObjectId>{
     public List<File> findByContentRegex(String content, Pageable pageable);
 
     @Query("{'content' : { $regex: :#{#incl}, $not: { $regex: :#{#excl} } }}")
-    List<File> getByIncludedContentAndNotByExcludedContentFromMongo(@Param("incl") String includedContent,@Param("excl") String excludedContent);
+    List<File> getByIncludedContentAndNotByExcludedContentFromMongo(@Param("incl") String includedContent,@Param("excl") String excludedContent, Pageable pageable);
 
-    List<File> findAllBy(TextCriteria criteria);
+    List<File> findAllBy(TextCriteria criteria, Pageable pageable);
 }
