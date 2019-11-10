@@ -1,5 +1,6 @@
 package info.unlp.edu.ar.bithub.model;
 
+import org.springframework.data.mongodb.core.index.TextIndexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -9,6 +10,7 @@ public class File {
 
     private String filename;
 
+    @TextIndexed
     private String content;
 
 

@@ -6,6 +6,7 @@ import info.unlp.edu.ar.bithub.repositories.FileRepository.MongoFileRepository;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.stereotype.Service;
 
 import javax.inject.Named;
 import java.util.List;
@@ -55,5 +56,9 @@ public class FileService {
 
     public List<File> getByIncludedContentAndNotByExcludedContentFromElastic(String includedContent, String excludedContent){
         return this.elasticFileRepository.getByIncludedContentAndNotByExcludedContentFromElastic(includedContent,excludedContent);
+    }
+
+    public List<File> getByIncludedContentAndNotByExcludedContentFromMongo(String includedContent, String excludedContent) {
+        return this.mongoFileRepository.getByIncludedContentAndNotByExcludedContentFromMongo(includedContent, excludedContent);
     }
 }

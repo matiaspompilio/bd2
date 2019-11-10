@@ -28,6 +28,12 @@ public class FileMongoController {
     public List<File> getByContentFromMongo(@PathVariable String content){
         return this.getFileService().getByContentFromMongo(content);
     }
+
+    @GetMapping("/{includedContent}/{excludedContent}")
+    public List<File> getByIncludedContentAndNotByExcludedContentFromMongo(@PathVariable String includedContent, @PathVariable String excludedContent){
+        return fileService.getByIncludedContentAndNotByExcludedContentFromMongo(includedContent,excludedContent);
+    }
+
     /*
     @PostMapping
     public ResponseEntity<?> addFile(@RequestParam(value = "content")String content,
