@@ -6,6 +6,7 @@ import info.unlp.edu.ar.bithub.repositories.FileRepository.MongoFileRepository;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.mongodb.core.query.TextCriteria;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Named;
@@ -60,5 +61,11 @@ public class FileService {
 
     public List<File> getByIncludedContentAndNotByExcludedContentFromMongo(String includedContent, String excludedContent) {
         return this.mongoFileRepository.getByIncludedContentAndNotByExcludedContentFromMongo(includedContent, excludedContent);
+    }
+
+    public List<File> getTextIncludedContentAndNotExcludedContentFromMongo(String includedContent, String excludedContent) {
+        TextCriteria criteria = TextCriteria.forDefaultLanguage().matchingAny(includedContent).notMatching(excludedContent);
+        List <File> files = this.mongoFileRepository.findAllBy(criteria);
+        return files;
     }
 }

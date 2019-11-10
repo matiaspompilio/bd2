@@ -4,6 +4,7 @@ import info.unlp.edu.ar.bithub.model.File;
 import info.unlp.edu.ar.bithub.model.User;
 import org.bson.types.ObjectId;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.mongodb.core.query.TextCriteria;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -17,4 +18,6 @@ public interface MongoFileRepository extends MongoRepository<File, ObjectId>{
 
     @Query("{'content' : { $regex: :#{#incl}, $not: { $regex: :#{#excl} } }}")
     List<File> getByIncludedContentAndNotByExcludedContentFromMongo(@Param("incl") String includedContent,@Param("excl") String excludedContent);
+
+    List<File> findAllBy(TextCriteria criteria);
 }

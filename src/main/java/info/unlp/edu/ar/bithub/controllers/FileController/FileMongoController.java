@@ -3,6 +3,7 @@ package info.unlp.edu.ar.bithub.controllers.FileController;
 import info.unlp.edu.ar.bithub.model.File;
 import info.unlp.edu.ar.bithub.services.FileService;
 import org.bson.types.ObjectId;
+import org.springframework.data.mongodb.core.query.TextCriteria;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,6 +34,12 @@ public class FileMongoController {
     public List<File> getByIncludedContentAndNotByExcludedContentFromMongo(@PathVariable String includedContent, @PathVariable String excludedContent){
         return fileService.getByIncludedContentAndNotByExcludedContentFromMongo(includedContent,excludedContent);
     }
+
+    @GetMapping("/text/{includedContent}/{excludedContent}")
+    public List<File> getTextIncludedContentAndNotExcludedContentFromMongo(@PathVariable String includedContent, @PathVariable String excludedContent){
+        return fileService.getTextIncludedContentAndNotExcludedContentFromMongo(includedContent,excludedContent);
+    }
+
 
     /*
     @PostMapping
