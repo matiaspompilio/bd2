@@ -35,7 +35,7 @@ public class FileMongoController {
         return fileService.getByIncludedContentAndNotByExcludedContentFromMongo(includedContent,excludedContent);
     }
 
-    @GetMapping("/text/{includedContent}/{excludedContent}")
+    @GetMapping("/indexed/{includedContent}/{excludedContent}")
     public List<File> getTextIncludedContentAndNotExcludedContentFromMongo(@PathVariable String includedContent, @PathVariable String excludedContent){
         return fileService.getTextIncludedContentAndNotExcludedContentFromMongo(includedContent,excludedContent);
     }
