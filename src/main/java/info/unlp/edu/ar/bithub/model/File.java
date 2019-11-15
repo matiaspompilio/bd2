@@ -5,10 +5,12 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
+@Document
 public class File {
 
     private String filename;
 
+    @TextIndexed
     private String content;
 
 
