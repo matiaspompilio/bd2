@@ -70,6 +70,7 @@ public class ElasticCommitRepository {
         return commits;
     }
 
+    @Deprecated
     public int getAmountOfFilesFromElastic(){
         SearchRequest searchRequest = new SearchRequest("bd2.commit");
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
@@ -77,7 +78,7 @@ public class ElasticCommitRepository {
         searchSourceBuilder.aggregation(AggregationBuilders
                 .sum("files")
                 .field("files")
-                //TERMINAR ESTA QUERY DE MIERDA
+                //TERMINAR ESTA QUERY muy bonita, javier si estás leyendo esto, dice mati que el cajón que le diste estaba rancio.
         );
         searchRequest.source(searchSourceBuilder.size(0));
         SearchResponse searchResponse;
